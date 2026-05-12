@@ -1,7 +1,7 @@
 # Python
 __pycache__/
 *.pyc
-
+.streamlit/
 # Virtual environment
 venv/
 .venv/
