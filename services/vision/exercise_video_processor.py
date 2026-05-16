@@ -4,7 +4,7 @@ import os
 import cv2
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from detectors.squat import SquatsDetector
+from detectors.squat import SquatDetector
 from detectors.lunges import LungesDetector
 from detectors.pushup import PushUpDetector
 from detectors.biceps_curl import BicepsCurlDetector
@@ -19,9 +19,9 @@ class VideoProcessorClass(VideoProcessorBase):
         self._latest_metrics=None
         self._exercise_type="Squats"
         model_path=os.path.join(os.getcwd(),"ml_models","pose_landmarker_full.task")
-        base_option=python.BaseOptions(model_path=model_path)
+        base_option = python.BaseOptions(model_asset_path=model_path)
         options=vision.PoseLandmarkerOptions(base_options=base_option,
-        running_mode=vision.PoseLandmarkerMode.VIDEO,
+        running_mode=vision.RunningMode.VIDEO,
         min_pose_detection_confidence=0.7,
         min_pose_presence_confidence=0.7,
         min_tracking_confidence=0.7,
@@ -30,7 +30,7 @@ class VideoProcessorClass(VideoProcessorBase):
         self._landmarker=vision.PoseLandmarker.create_from_options(options)
 
         self._detectors={
-            "Squats":SquatsDetector(),
+            "Squats":SquatDetector(),
             "Lunges":LungesDetector(),
             "PushUp":PushUpDetector(),
             "BicepsCurls":BicepsCurlDetector(),
