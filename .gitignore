@@ -16,3 +16,4 @@ Main App/data.db
 
 # Logs
 *.log
+.env*
